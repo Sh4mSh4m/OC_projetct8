@@ -12,10 +12,20 @@
           </div>
           <div class="col-lg-8 mx-auto">
             <p class="text-faded mb-5">Trouvez un produit de substitution pour ceux que vous consommez tous les jours</p>
-            <a class="btn btn-primary btn-xl js-scroll-trigger" href="#about">Barre de recherche</a>
           </div>
         </div>
-      </div>
+        <div class="row">
+          <div class="col-lg-12 detail-separator">
+            <form class="col-lg-12 text-center" action="{% url 'purbeurre:search' %}" method="get" accept-charset="utf-8">
+              <div class="form-group">
+                <label for="searchForm">Chercher un produit</label>
+                <input id="searchForm" class="form-control" name="query">
+              </div>
+              <span class="help-block" id="helpBlock">Trouvez le produit dont vous cherchez le substitut.</span>
+            </form>
+          </div>
+        </div>
+      </div>  
     </header>
 
 
