@@ -1,0 +1,12 @@
+Hello 
+
+
+{% if latest_product %}
+    <ul>
+    {% for product in latest_product %}
+        <li><a href="{% url 'purbeurre:detail' product.pk %}">{{ product.name }} -- {{product.quantity}} -- {{ product.brands }} </a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No polls are available.</p>
+{% endif %}

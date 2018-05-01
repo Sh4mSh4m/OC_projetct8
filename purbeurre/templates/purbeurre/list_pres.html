@@ -1,0 +1,14 @@
+{% if products %}
+{% for product in products %}
+    <div class="col-sm-4 text-center">
+        <a href="/">
+          <img class="img-responsive" src="{{ product.productimagethumburl }}" alt="{{ product.name }}">
+        </a>
+        <h3><a href="/">{{ product.name }} par {{product.brands }} {{ product.main_category }}</a></h3>        
+    </div>
+    {% if forloop.counter|divisibleby:3 %}<div class="clearfix"></div>{% endif %}
+{% endfor %}
+{% else %}
+    <p>Pas de produits trouvés, désolé.</p>
+{% endif %}
+

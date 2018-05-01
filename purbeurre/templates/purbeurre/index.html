@@ -1,12 +1,23 @@
-Hello 
+{% extends 'purbeurre/base.html' %}
+
+{% block content %}
+    <header class="masthead text-center text-white d-flex">
+      <div class="container my-auto">
+        <div class="row">
+          <div class="col-lg-10 mx-auto">
+            <h1 class="text-uppercase">
+              <strong>Du gras, oui, mais de la qualité</strong>
+            </h1>
+            <hr>
+          </div>
+          <div class="col-lg-8 mx-auto">
+            <p class="text-faded mb-5">Trouvez un produit de substitution pour ceux que vous consommez tous les jours</p>
+            <a class="btn btn-primary btn-xl js-scroll-trigger" href="#about">Barre de recherche</a>
+          </div>
+        </div>
+      </div>
+    </header>
 
 
-{% if latest_product %}
-    <ul>
-    {% for product in latest_product %}
-        <li><a href="{% url 'purbeurre:detail' product.pk %}">{{ product.name_product }}</a></li>
-    {% endfor %}
-    </ul>
-{% else %}
-    <p>No polls are available.</p>
-{% endif %}
+
+{% endblock %}
