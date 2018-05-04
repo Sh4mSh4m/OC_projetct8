@@ -1,3 +1,6 @@
+{% load staticfiles %} 
+
+
 {% if substitutes %}
 {% for product in substitutes %}
     <div class="col-sm-4 text-center">
@@ -9,6 +12,10 @@
     {% if forloop.counter|divisibleby:3 %}<div class="clearfix"></div>{% endif %}
 {% endfor %}
 {% else %}
-    <p>Pas de produits de substitution disponibles.</p>
+    <div class="col-md-6 mx-auto text-center">
+        <img src="{% static 'purbeurre/img/images404.png' %}" class="img-fluid" alt="404 error">
+        <h4>Sorry</h4>
+        <h4><em>Désolé je n'ai pas trouvé de produits de substitution correspondants à votre recherche.</em></h4>
+    </div>
 {% endif %}
 

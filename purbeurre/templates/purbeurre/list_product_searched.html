@@ -1,0 +1,37 @@
+{% load staticfiles %}
+
+{% if products %}
+{% for product in products %}
+    <div class="col-sm-4 text-center">
+        <a href="/">
+            <img class="img-responsive" src="{{ product.productimagethumburl }}" alt="{{ product.name }}">
+        </a>
+        <h3><a href="{% url 'purbeurre:substitute' product_id=product.id %}">{{ product.name }} par {{product.brands }} {{ product.main_category }}</a></h3>
+    </div>
+    {% if forloop.counter|divisibleby:3 %}<div class="clearfix"></div>{% endif %}
+{% endfor %}
+    <div class="row"><p></p></div>
+    <div class="mx-auto text-center">
+          <div class="pagination">
+              <span class="step-links">
+                  {% if products.has_previous %}
+                      <a href="?query={{ product_searched }}&page=1">&laquo; first</a>
+                      <a href="?query={{ product_searched }}&page={{ products.previous_page_number }}">previous</a>
+                  {% endif %}
+                  <span class="current">
+                      Page {{ products.number }} of {{ products.paginator.num_pages }}.
+                  </span>
+                  {% if products.has_next %}
+                      <a href="?query={{ product_searched }}&page={{ products.next_page_number }}">next</a>
+                      <a href="?query={{ product_searched }}&¬page={{ products.paginator.num_pages }}">last &raquo;</a>
+                  {% endif %}
+              </span>
+          </div>
+    </div>
+{% else %}
+    <div class="col-md-6 mx-auto text-center">
+        <img src="{% static 'purbeurre/img/images404.png' %}" class="img-fluid" alt="404 error">
+        <h4>Sorry</h4>
+        <h4><em>Désolé je n'ai pas trouvé de produits de substitution correspondants à votre recherche.</em></h4>
+    </div>
+{% endif %}
