@@ -7,7 +7,7 @@
         <a href="/">
           <img class="img-responsive" src="{{ product.productimagethumburl }}" alt="{{ product.name }}">
         </a>
-        <h3><a href="/">{{ product.name }} {{product.nutrition_grade}} {{ product.main_category }}</a></h3>        
+        <p><a href="/">{{ product.name }} {{product.nutrition_grade}}</a></p>        
     </div>
     {% if forloop.counter|divisibleby:3 %}<div class="clearfix"></div>{% endif %}
 {% endfor %}
