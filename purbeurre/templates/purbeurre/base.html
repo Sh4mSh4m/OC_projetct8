@@ -48,10 +48,10 @@
             </li>
             {% if user.is_authenticated %}
               <li class="nav-item">
-                <a class="nav-link js-scroll-trigger" href="#services"><i class="fa fa-male fa-2x"></i></a>
+                <a class="nav-link js-scroll-trigger" href="{% url 'purbeurre:my_account' user.id %}"><i class="fa fa-male fa-2x"></i></a>
               </li>
               <li class="nav-item">
-                <a class="nav-link js-scroll-trigger" href="#portfolio"><i class="fa fa-spoon fa-2x"></i></a>
+                <a class="nav-link js-scroll-trigger" href="{% url 'purbeurre:my_products' user.id 0 %}"><i class="fa fa-spoon fa-2x"></i></a>
               </li>
             {% endif %}
             <li class="nav-item">

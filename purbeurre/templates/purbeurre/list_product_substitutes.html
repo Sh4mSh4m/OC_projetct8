@@ -5,7 +5,7 @@
 {% if substitutes %}
 {% for product in substitutes %}
     <div class="col-sm-4 text-center">
-        <a href="/">
+        <a href="{% url 'purbeurre:detail' product.id %}">
           <img class="img-responsive" src="{{ product.productimagethumburl }}" alt="{{ product.name }}">
         </a>
         {% if -15 <= product.nutrition_grade and product.nutrition_grade <= -2 %}
@@ -19,7 +19,8 @@
         {% elif 17 <= product.nutrition_grade and product.nutrition_grade  <= 40 %}
           <img class="img-responsive" src="{% static 'purbeurre/img/120px-Nutri-score-E.png' %}" alt="{{ product.name }}">
         {% endif %}
-        <h6><a href="/">{{ product.name }} {{product.quantity}} de marque {{product.brands}} de {{product.nutrition_grade}}</a></h6>         
+        <h6><a href="{% url 'purbeurre:detail' product.id %}">{{ product.name }} {{product.quantity}} de marque {{product.brands}}</a></h6>
+        <h6><a href="{% url 'purbeurre:my_products' user_id=user.id product_id=product.id %}"><i class="fa fa-floppy-o"></i>&emsp;Sauvegarder</a></h6>
     </div>
     {% if forloop.counter|divisibleby:3 %}<div class="clearfix"></div><div class="h10 row"><p>test</p></div>{% endif %}
 {% endfor %}

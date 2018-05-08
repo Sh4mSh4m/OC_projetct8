@@ -17,5 +17,9 @@ urlpatterns = [
     # ex: /purbeurre/accoutnts
     path('accounts/', include('django.contrib.auth.urls'), name='accounts'),
     # ex: /purbeurre/back_admin/
-    path('back_admin', admin.site.urls)
+    path('back_admin', admin.site.urls),
+    # ex: /purbeurre/my_products/2/0
+    path('my_products/<int:user_id>/<int:product_id>', views.my_products, name='my_products'),
+    # ex: /purbeurre/my_products/2/0
+    path('my_account/<int:user_id>', views.my_account, name='my_account'),
 ]

@@ -1,9 +1,49 @@
-Hello 
+{% extends 'purbeurre/base.html' %}
+{% load staticfiles %}
 
-my name is "{{ product.name }}"
-{{ product.brands }}
-{{ product.id }}
-{{ product.description }}
-{{ product.quantity }}
-
-Fin
+{% block content %}
+   <section class="bg-primary" id="about">
+      <div class="container-fluid p-0">
+        <div class="h-25 row" style="background-image: url('{{product.productimageurl}}'); background-repeat: no-repeat; background-size: 100%; filter: brightness(75%)">
+          <div class="container h100">
+            <div class="row h-100 justify-content-center align-items-center">
+              <h1 style="color: #000">{{ product.name }} {{product.quantity}} {{product.brands}}</h1>
+            </div>
+          </div>  
+        </div>
+        <div class="h-25 row"">
+          <div class="container h100">
+            <div class="row h-100 justify-content-center align-items-center">
+              <div class="col-md-6 justify-content-center align-items-center">	
+              	<img class="img-responsive" src="{{ product.productimagethumburl }}" alt="{{ product.name }}">
+                {% if -15 <= product.nutrition_grade and product.nutrition_grade <= -2 %}
+                <img class="img-responsive" src="{% static 'purbeurre/img/120px-Nutri-score-A.png' %}" alt="{{ product.name }}">
+                {% elif -1 <= product.nutrition_grade and product.nutrition_grade <= 3 %}
+                <img class="img-responsive" src="{% static 'purbeurre/img/120px-Nutri-score-B.png' %}" alt="{{ product.name }}">
+                {% elif 4 <= product.nutrition_grade and product.nutrition_grade  <= 11 %}
+                <img class="img-responsive" src="{% static 'purbeurre/img/120px-Nutri-score-C.png' %}" alt="{{ product.name }}">
+                {% elif 12 <= product.nutrition_grade and product.nutrition_grade  <= 16 %}
+                <img class="img-responsive" src="{% static 'purbeurre/img/120px-Nutri-score-D.png' %}" alt="{{ product.name }}">
+                {% elif 17 <= product.nutrition_grade and product.nutrition_grade  <= 40 %}
+                <img class="img-responsive" src="{% static 'purbeurre/img/120px-Nutri-score-E.png' %}" alt="{{ product.name }}">
+                {% endif %}
+              </div>
+              <div class="col-md-6 justify-content-center align-items-center text-center">
+              {% if product.description == "" %}
+              	<p>Désolé, pas de description du produit disponible, retrouvez plus d'informations sur le site d'Open Food Facts en cliquant sur le lien ci-dessous</p>
+              {% else %}
+              	<p>Description: {{product.description}}</p>
+              {% endif %}              
+              </div>
+            </div>
+          </div>  
+        </div>    
+        <div class="row  justify-content-center align-items-center text-center">
+          <h6><a href="{{ product.url }}">Voir la fiche du produit sur OpenFoodFacts</a></h6>
+        </div>
+        <div class="row  justify-content-center align-items-center text-center">
+          <h6><a href="{% url 'purbeurre:my_products' user_id=user.id product_id=product.id %}"><i class="fa fa-floppy-o"></i>&emsp;Sauvegarder</a></h6>
+        </div>
+      </div>
+    </section>
+{% endblock %}

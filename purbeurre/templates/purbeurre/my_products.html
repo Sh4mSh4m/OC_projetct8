@@ -1,0 +1,35 @@
+{% extends 'purbeurre/base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+    <section class="bg-primary" id="about">
+      <div class="container-fluid p-0">
+        <div class="h-25 row" style="background-image: url('{% static 'purbeurre/img/userpage.jpg' %}'); background-repeat: no-repeat; background-size: 100%; filter: brightness(75%)">
+          <div class="container h100">
+            <div class="row h-100 justify-content-center align-items-center">
+              <h1 style="color: #FFFFFF">Ahoy <BR> {{ user.first_name }} {{ user.last_name }} </h1>
+            </div>
+          </div>  
+        </div>
+        <div class="h-25 row">
+          <div class="container h100">
+            <div class="row h-100 justify-content-center align-items-center">
+              <div class="col-md-6 justify-content-center align-items-center">
+                <ul>
+                  <li>Ci-dessous les produits sauvegardés.</li>
+                  {% if already_added and product_added %}
+                  <li>Vous avez <em>déjà</em> ajouté le produit {{ product_added.name }}</li>
+                  {% elif not already_added and product_added %}
+                  <li>Vous avez ajouté le produit <em>{{ product_added.name }}</em></li>
+                  {% else %}
+                  <li>Utilisez la barre de recherche dans la barre de navigation pour trouver de nouveaux produits !!!</em></li>                 
+                  {% endif %}
+                </ul>  
+              </div>  
+            </div>
+          </div>  
+        </div>
+      </div>
+          {% include 'purbeurre/list_product_saved.html' %}
+    </section>
+{% endblock %}
