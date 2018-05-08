@@ -28,7 +28,7 @@ def search(request):
 
 def substitute(request, product_id):
     product = get_object_or_404(Products, pk=product_id)
-    substitutes = Products.objects.exclude(brands=product.brands).filter(main_category=product.main_category).filter(nutrition_grade__gte=product.nutrition_grade).order_by('-nutrition_grade')[:6]
+    substitutes = Products.objects.exclude(brands=product.brands).filter(main_category=product.main_category).filter(nutrition_grade__lte=product.nutrition_grade).order_by('nutrition_grade')[:6]
     return render(request, 'purbeurre/substitute.html', {'product':product, 'substitutes': substitutes})
 
 def detail(request, product_id):

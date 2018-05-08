@@ -1,5 +1,6 @@
 {% load staticfiles %} 
 
+<div class="row">
 
 {% if substitutes %}
 {% for product in substitutes %}
@@ -7,9 +8,20 @@
         <a href="/">
           <img class="img-responsive" src="{{ product.productimagethumburl }}" alt="{{ product.name }}">
         </a>
-        <p><a href="/">{{ product.name }} {{product.nutrition_grade}}</a></p>        
+        {% if -15 <= product.nutrition_grade and product.nutrition_grade <= -2 %}
+          <img class="img-responsive" src="{% static 'purbeurre/img/120px-Nutri-score-A.png' %}" alt="{{ product.name }}">
+        {% elif -1 <= product.nutrition_grade and product.nutrition_grade <= 3 %}
+          <img class="img-responsive" src="{% static 'purbeurre/img/120px-Nutri-score-B.png' %}" alt="{{ product.name }}">
+        {% elif 4 <= product.nutrition_grade and product.nutrition_grade  <= 11 %}
+          <img class="img-responsive" src="{% static 'purbeurre/img/120px-Nutri-score-C.png' %}" alt="{{ product.name }}">
+        {% elif 12 <= product.nutrition_grade and product.nutrition_grade  <= 16 %}
+          <img class="img-responsive" src="{% static 'purbeurre/img/120px-Nutri-score-D.png' %}" alt="{{ product.name }}">
+        {% elif 17 <= product.nutrition_grade and product.nutrition_grade  <= 40 %}
+          <img class="img-responsive" src="{% static 'purbeurre/img/120px-Nutri-score-E.png' %}" alt="{{ product.name }}">
+        {% endif %}
+        <h6><a href="/">{{ product.name }} {{product.quantity}} de marque {{product.brands}} de {{product.nutrition_grade}}</a></h6>         
     </div>
-    {% if forloop.counter|divisibleby:3 %}<div class="clearfix"></div>{% endif %}
+    {% if forloop.counter|divisibleby:3 %}<div class="clearfix"></div><div class="h10 row"><p>test</p></div>{% endif %}
 {% endfor %}
 {% else %}
     <div class="col-md-6 mx-auto text-center">
@@ -18,4 +30,4 @@
         <h4><em>Désolé je n'ai pas trouvé de produits de substitution correspondants à votre recherche.</em></h4>
     </div>
 {% endif %}
-
+</div>

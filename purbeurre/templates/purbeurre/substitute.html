@@ -3,19 +3,17 @@
 {% block content %}
    <section class="bg-primary" id="about">
       <div class="container-fluid p-0">
-        <div class="h-25 row" style="background-image: url('{{product.productimageurl}}'); background-repeat: no-repeat; background-size: 100%;">
+        <div class="h-25 row" style="background-image: url('{{product.productimageurl}}'); background-repeat: no-repeat; background-size: 100%; filter: brightness(50%)">
           <div class="container h100">
             <div class="row h-100 justify-content-center align-items-center">
-              <h1 class="text-faded mb-4">{{ product.name }}</h1>
+              <h1 style="color: #FFFFFF">{{ product.name }} {{product.nutrition_grade}}</h1>
             </div>
           </div>  
-<!--          <div class="mx-auto text-center" >
-            <h2 class="text-faded mb-4">{{ product.name }}</h2>
-          </div>-->
         </div>
-        <div class="row">
+        <div class="h-20 row justify-content-center align-items-center">
+            <p>Vous pouvez remplacer cet aliment par :</p>
+        </div>
           {% include 'purbeurre/list_product_substitutes.html' %}
-        </div>
       </div>
     </section>
 {% endblock %}
