@@ -14,7 +14,7 @@ class Categories(models.Model):
     name_category = models.CharField(unique=True, max_length=100, blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'categories'
 
 
@@ -31,7 +31,7 @@ class Products(models.Model):
     productimagethumburl = models.CharField(db_column='productImageThumbUrl', max_length=200, blank=True, null=True)  # Field name made lowercase.
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'products'
         unique_together = (('name', 'description', 'quantity'),)
 
@@ -42,7 +42,7 @@ class ProductsCategories(models.Model):
     id = models.AutoField(primary_key=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'products_categories'
         unique_together = (('product', 'category'),)
 

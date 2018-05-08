@@ -7,16 +7,9 @@ from django.views import generic
 from .models import Products, UsersProducts
 from django.contrib.auth.models import User
 
-class IndexView(generic.ListView):
-	template_name = 'purbeurre/index.html'
-	context_object_name = 'latest_product'
 
-	def get_queryset(self):
-		return Products.objects.order_by('-name')[2000:2006]
-
-class DetailView(generic.DetailView):
-    model = Products
-    template_name = 'purbeurre/detail.html'
+def index(request):
+    return render(request, 'purbeurre/index.html')
 
 def search(request):
     product_searched= request.GET.get('query')
@@ -51,8 +44,6 @@ def my_products(request, user_id, product_id):
     else:
         already_added=False
         product_added=None
-    #obtenir la liste des produits liés à l'utilisateur
-    print("je vais choper les produits du user")
     products_list = Products.objects.filter(usersproducts__user_id=user_id).order_by('name')
     page = request.GET.get('page')
     paginator = Paginator(products_list, 9)

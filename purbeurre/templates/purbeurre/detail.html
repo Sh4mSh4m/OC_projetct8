@@ -41,9 +41,11 @@
         <div class="row  justify-content-center align-items-center text-center">
           <h6><a href="{{ product.url }}">Voir la fiche du produit sur OpenFoodFacts</a></h6>
         </div>
+        {% if user.is_authenticated %}
         <div class="row  justify-content-center align-items-center text-center">
           <h6><a href="{% url 'purbeurre:my_products' user_id=user.id product_id=product.id %}"><i class="fa fa-floppy-o"></i>&emsp;Sauvegarder</a></h6>
         </div>
+        {% endif %}
       </div>
     </section>
 {% endblock %}
