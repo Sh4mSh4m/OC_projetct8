@@ -11,14 +11,18 @@
             </div>
           </div>  
         </div>
-        <div class="h-25 row">
+        <div class="row">
           <div class="container h100">
             <div class="row h-100 justify-content-center align-items-center">
               <div class="col-md-6 justify-content-center align-items-center">
                 <ul>
                   <li>Ci-dessous une sélection de produits qui vous permettront de remplacer cet aliment.</li>
                   <li>Cliquez sur le produit pour plus d'informations.</li>
+                  {% if user.is_authenticated %}
                   <li> Sauvegardez le produit dans votre liste d'aliments de substitution</li>
+                  {% else %}
+                  <li><h6><a href="{% url 'purbeurre:login' %}?next={{ request.path }}"><i class="fa fa fa-users"></i>&emsp;Aller à la page d'authentification pour sauvegarder</a></h6></li>
+                  {% endif %}
                 </ul>  
               </div>  
             </div>

@@ -10,9 +10,9 @@ urlpatterns = [
     path('', views.index, name='index'),
     # Detail ex: /purbeurre/5/
     path('<int:product_id>/', views.detail, name='detail'),
-    # Search ex: /purbeurre/search/banane%20de%20mer
+    # Search ex: /purbeurre/search?query=banane%20de%20mer
     path('search', views.search, name='search'),
-    # Substitute ex: /purbeurre/substitute/name
+    # Substitute ex: /purbeurre/substitute/5
     path('substitute/<int:product_id>', views.substitute, name='substitute'),
     # Accounts ex: /purbeurre/accounts
     path('accounts/', include('django.contrib.auth.urls'), name='accounts'),
@@ -22,4 +22,6 @@ urlpatterns = [
     path('my_products/<int:user_id>/<int:product_id>', views.my_products, name='my_products'),
     # My_account ex: /purbeurre/my_products/2/0
     path('my_account/<int:user_id>', views.my_account, name='my_account'),
+    # sign_up ex: /purbeurre/sign_up/
+    path('sign_up', views.sign_up, name='sign_up'),
 ]

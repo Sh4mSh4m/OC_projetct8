@@ -26,10 +26,23 @@ kinder_bueno = {
     'description': "Kinder bueno plein de sucre",
     'quantity': "80g",
     'brands': "Ferrero",
-    'nutrition_grade': 0,
+    'nutrition_grade': 10,
     'main_category': "Sucreries",
     'productimageurl': "http://google.fr/image/21",
     'productimagethumburl': "http://google.fr/image/thumb/21",
+    }
+
+barre_cereales = {
+    'id': 22,
+    'url': "http://google.fr/barre_cereales",
+    'name': "Barre cereales",
+    'description': "Barre saine",
+    'quantity': "80g",
+    'brands': "Good food",
+    'nutrition_grade': -7,
+    'main_category': "Sucreries",
+    'productimageurl': "http://google.fr/image/22",
+    'productimagethumburl': "http://google.fr/image/thumb/22",
     }
 
 
@@ -65,21 +78,73 @@ class TestAllViewsNoLogin(TestCase):
     def test_search_no_login(self):
         """
         If no login, response OK
-        product name must be present in page.
+        product name must be present in page. Along with product of same 
+        main_category
+        Includes link to login
         """
         product = create_product(**kinder)
+        product2 = create_product(**kinder_bueno)
+        product3 = create_product(**barre_cereales)
         response = self.client.get('/purbeurre/search?query=kinder')
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, "Kinder")
+        self.assertContains(response, "bueno")
+        self.assertNotContains(response, "cereales")
+        self.assertNotContains(response, "login")
+
+    def test_search_no_result_no_login(self):
+        """
+        If no login, response OK
+        If searched product is not found, error message appears
+        Includes link to login
+        """
+        product = create_product(**kinder)
+        product2 = create_product(**kinder_bueno)
+        product3 = create_product(**barre_cereales)
+        response = self.client.get('/purbeurre/search?query=mlkjmlkj')
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "Désolé")
+
 
     def test_substitute_no_login(self):
         """
         If no login, response OK
         other product name must appear on page.
+        Healthier option appears but not option of the same brands
         """
         product = create_product(**kinder)
         product2 = create_product(**kinder_bueno)
+        product3 = create_product(**barre_cereales)
         response = self.client.get(reverse('purbeurre:substitute', args=(product.id,)))
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, "Kinder")
-        self.assertContains(response, "Kinder bueno")
+        self.assertNotContains(response, "bueno")
+        self.assertContains(response, "cereales")
+
+    def test_accounts_no_login(self):
+        """
+        If no login, response OK
+        Authentication fields available
+        """
+        response = self.client.get('/purbeurre/accounts/login/')
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "Authentification")
+
+
+
+class TestAllViewsLoggedIn(TestCase):
+    def test_search_no_login(self):
+        """
+        If no login, response OK
+        product name must be present in page. Along with product of same 
+        main_category
+        """
+        product = create_product(**kinder)
+        product2 = create_product(**kinder_bueno)
+        product3 = create_product(**barre_cereales)
+        response = self.client.get('/purbeurre/search?query=kinder')
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "Kinder")
+        self.assertContains(response, "bueno")
+        self.assertNotContains(response, "cereales")
+        self.assertNotContains(response, "Sauvegarder")
