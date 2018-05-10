@@ -1,0 +1,28 @@
+{% extends 'purbeurre/base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+    <section class="bg-primary" id="about">
+      <div class="container-fluid p-0">
+        <div class="h-25 row" style="background-image: url('{% static 'purbeurre/img/userpage.jpg' %}'); background-repeat: no-repeat; background-size: 100%; filter: brightness(75%)">
+          <div class="container h100">
+            <div class="row h-100 justify-content-center align-items-center">
+              <h1 style="color: #FFFFFF">Ahoy <BR> Créer votre compte </h1>
+            </div>
+          </div>  
+        </div>
+        <div class="h-25 row">
+          <div class="container h100">
+            <div class="row h-100 justify-content-center">
+                <form method="post">
+                  {% csrf_token %}
+                  {{ form.as_p }}
+                  <button type="submit">Sign up</button>
+                </form>
+            </div>
+          </div>  
+        </div>
+      </div>
+    </section>
+
+{% endblock %}

@@ -8,8 +8,8 @@ app_name = 'purbeurre'
 urlpatterns = [
     # Index ex: /purbeurre/
     path('', views.index, name='index'),
-    # Detail ex: /purbeurre/5/
-    path('<int:product_id>/', views.detail, name='detail'),
+    # Detail ex: /purbeurre/5
+    path('<int:product_id>', views.detail, name='detail'),
     # Search ex: /purbeurre/search?query=banane%20de%20mer
     path('search', views.search, name='search'),
     # Substitute ex: /purbeurre/substitute/5
