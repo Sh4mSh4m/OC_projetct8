@@ -6,16 +6,31 @@ from django.test import Client
 
 from .models import Products, UsersProducts
 
-    id = 20 
-    url = "http://google.fr"
-    name = "Kinder"
-    description = "Kinder bueno plein de sucre"
-    quantity = "80g"
-    brands = "Ferrero"
-    nutrition_grade = 15
-    main_category = "Sucreries"
-    productimageurl = "http://google.fr/image/20"
-    productimagethumburl = "http://google.fr/image/thumb/20"
+kinder = {
+    'id': 20,
+    'url': "http://google.fr/kinder",
+    'name': "Kinder",
+    'description': "Kinder le truc plein de sucre",
+    'quantity': "80g",
+    'brands': "Ferrero",
+    'nutrition_grade': 15,
+    'main_category': "Sucreries",
+    'productimageurl': "http://google.fr/image/20",
+    'productimagethumburl': "http://google.fr/image/thumb/20",
+    }
+
+kinder_bueno = {
+    'id': 21,
+    'url': "http://google.fr/kinder_bueno",
+    'name': "Kinder bueno",
+    'description': "Kinder bueno plein de sucre",
+    'quantity': "80g",
+    'brands': "Ferrero",
+    'nutrition_grade': 0,
+    'main_category': "Sucreries",
+    'productimageurl': "http://google.fr/image/21",
+    'productimagethumburl': "http://google.fr/image/thumb/21",
+    }
 
 
 def create_product(**kwargs):
@@ -24,17 +39,8 @@ def create_product(**kwargs):
     given number of `days` offset to now (negative for questions published
     in the past, positive for questions that have yet to be published).
     """
-    return Products.objects.create(
-                                   id = id,
-                                   url = url,
-                                   description = description,
-                                   quantity = quantity,
-                                   brands = brands,
-                                   nutrition_grade= nutrition_grade,
-                                   main_category = main_category,
-                                   productimageurl = productimageurl,
-                                   productimagethumburl = productimagethumburl
-                                   )
+    return Products.objects.create(**kwargs)
+
 class TestAllViewsNoLogin(TestCase):
     def test_index_no_login(self):
         """
@@ -47,26 +53,33 @@ class TestAllViewsNoLogin(TestCase):
     def test_detail_no_login(self):
         """
         If no login, response OK
+        Contains text of the detail.html page.detail
+        Contains name of the product
         """
-        product = create_product()
+        product = create_product(**kinder)
         response = self.client.get(reverse('purbeurre:detail', args=(product.id,)))
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, "Voir la fiche du ")
+        self.assertContains(response, "kinder") 
 
     def test_search_no_login(self):
         """
         If no login, response OK
+        product name must be present in page.
         """
-        product = create_product()
+        product = create_product(**kinder)
         response = self.client.get('/purbeurre/search?query=kinder')
         self.assertEqual(response.status_code, 200)
-        self.assertContains(response, "kinder")
+        self.assertContains(response, "Kinder")
 
     def test_substitute_no_login(self):
         """
         If no login, response OK
+        other product name must appear on page.
         """
-        product = create_product()
-        response = self.client.get('/purbeurre/search?query=kinder')
+        product = create_product(**kinder)
+        product2 = create_product(**kinder_bueno)
+        response = self.client.get(reverse('purbeurre:substitute', args=(product.id,)))
         self.assertEqual(response.status_code, 200)
-        self.assertContains(response, "kinder")
+        self.assertContains(response, "Kinder")
+        self.assertContains(response, "Kinder bueno")

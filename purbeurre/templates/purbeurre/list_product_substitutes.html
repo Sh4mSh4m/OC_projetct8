@@ -20,7 +20,9 @@
           <img class="img-responsive" src="{% static 'purbeurre/img/120px-Nutri-score-E.png' %}" alt="{{ product.name }}">
         {% endif %}
         <h6><a href="{% url 'purbeurre:detail' product.id %}">{{ product.name }} {{product.quantity}} de marque {{product.brands}}</a></h6>
+        {% if user.is_authenticated %}
         <h6><a href="{% url 'purbeurre:my_products' user_id=user.id product_id=product.id %}"><i class="fa fa-floppy-o"></i>&emsp;Sauvegarder</a></h6>
+        {% endif %}
     </div>
     {% if forloop.counter|divisibleby:3 %}<div class="clearfix"></div><div class="h10 row"><p>test</p></div>{% endif %}
 {% endfor %}
