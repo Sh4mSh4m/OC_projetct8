@@ -25,7 +25,7 @@ SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', '#jt&uwq_fe5)+n)qn%+y_w7^5&y(0i
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = bool( os.environ.get('DJANGO_DEBUG', True) )
 
-ALLOWED_HOSTS = ['purbeurre-hieu.herokuapp.com']
+ALLOWED_HOSTS = ['quiet-savannah-20186.herokuapp.com']
 
 
 # Application definition
