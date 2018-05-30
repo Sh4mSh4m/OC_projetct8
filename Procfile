@@ -1,1 +1,1 @@
-web: gunicorn OC_Project8.wsgi --log-file -
+web: gunicorn OC_project8.wsgi --log-file -
