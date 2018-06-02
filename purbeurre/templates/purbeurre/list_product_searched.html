@@ -6,7 +6,11 @@
 {% for product in products %}
     <div class="col-sm-4 text-center">
         <a href="{% url 'purbeurre:substitute' product_id=product.id %}">
+        {% if not product.productimagethumburl %}
+          <img class="img-responsive" src="{% static 'purbeurre/img/no-image.png' %}" alt="{{ product.name }}">
+        {% else %}
             <img class="img-responsive" src="{{ product.productimagethumburl }}" alt="{{ product.name }}">
+        {% endif %}
         </a>
         <h6><a href="{% url 'purbeurre:substitute' product_id=product.id %}">{{ product.name }} {{ product.quantity }} par {{product.brands }}</a></h6>
     </div>
