@@ -14,8 +14,12 @@
         <div class="h-25 row"">
           <div class="container h100">
             <div class="row h-100 justify-content-center align-items-center">
-              <div class="col-md-6 justify-content-center align-items-center">	
+              <div class="col-md-6 justify-content-center align-items-center">
+                {% if not product.productimagethumburl %}
+                <img class="img-responsive" src="{% static 'purbeurre/img/no-image.png' %}" alt="{{ product.name }}">
+                {% else %}
               	<img class="img-responsive" src="{{ product.productimagethumburl }}" alt="{{ product.name }}">
+                {% endif %}
                 {% if -15 <= product.nutrition_grade and product.nutrition_grade <= -2 %}
                 <img class="img-responsive" src="{% static 'purbeurre/img/120px-Nutri-score-A.png' %}" alt="{{ product.name }}">
                 {% elif -1 <= product.nutrition_grade and product.nutrition_grade <= 3 %}
