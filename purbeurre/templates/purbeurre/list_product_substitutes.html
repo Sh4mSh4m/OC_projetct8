@@ -6,7 +6,11 @@
 {% for product in substitutes %}
     <div class="col-sm-4 text-center">
         <a href="{% url 'purbeurre:detail' product.id %}">
+        {% if product.productimagethumburl is None %}
+          <img class="img-responsive" src="{% static 'purbeurre/img/Image-not-found.gif' %}" alt="{{ product.name }}">
+        {% else %}
           <img class="img-responsive" src="{{ product.productimagethumburl }}" alt="{{ product.name }}">
+        {% endif %}}
         </a>
         {% if -15 <= product.nutrition_grade and product.nutrition_grade <= -2 %}
           <img class="img-responsive" src="{% static 'purbeurre/img/120px-Nutri-score-A.png' %}" alt="{{ product.name }}">

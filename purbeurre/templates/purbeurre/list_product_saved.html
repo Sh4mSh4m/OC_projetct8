@@ -5,7 +5,7 @@
 {% if products %}
 {% for product in products %}
     <div class="col-sm-4 text-center">
-        <a href="/">
+        <a href="{% url 'purbeurre:detail' product_id=product.id %}">
             <img class="img-responsive" src="{{ product.productimagethumburl }}" alt="{{ product.name }}">
         </a>
         <h6><a href="{% url 'purbeurre:detail' product_id=product.id %}">{{ product.name }} {{ product.quantity }} par {{product.brands }}</a></h6>
