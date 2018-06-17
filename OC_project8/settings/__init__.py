@@ -20,12 +20,12 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-#SECRET_KEY = '#jt&uwq_fe5)+n)qn%+y_w7^5&y(0iwj3yd-962ey8zn23&veu'
-SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', '#jt&uwq_fe5)+n)qn%+y_w7^5&y(0iwj3yd-962ey8zn23&veu')
+SECRET_KEY = '#jt&uwq_fe5)+n)qn%+y_w7^5&y(0iwj3yd-962ey8zn23&veu'
+#SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', '#jt&uwq_fe5)+n)qn%+y_w7^5&y(0iwj3yd-962ey8zn23&veu')
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = bool( os.environ.get('DJANGO_DEBUG', True) )
+DEBUG =False 
 
-ALLOWED_HOSTS = ['quiet-savannah-20186.herokuapp.com', '127.0.0.1']
+ALLOWED_HOSTS = ['209.97.141.179', '127.0.0.1']
 
 
 # Application definition
@@ -77,11 +77,11 @@ WSGI_APPLICATION = 'OC_project8.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'purbeurre',
-        'USER': 'djangosrv',
-        'PASSWORD': 'iD0ntKn0w',
-        'HOST': '',
+        'USER': 'sham',
+        'PASSWORD': 'shamsham81',
+        'HOST': 'localhost',
         'PORT': '5432',
     }
 }
