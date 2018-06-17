@@ -31,6 +31,7 @@ ALLOWED_HOSTS = ['209.97.141.179', '127.0.0.1']
 # Application definition
 
 INSTALLED_APPS = [
+    'raven.contrib.django.raven_compat',
     'purbeurre.apps.PurbeurreConfig',
     'django.contrib.admin',
     'django.contrib.auth',
