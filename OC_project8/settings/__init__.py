@@ -11,21 +11,18 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 """
 
 import os
-
+import raven
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
+DEBUG=False
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = '#jt&uwq_fe5)+n)qn%+y_w7^5&y(0iwj3yd-962ey8zn23&veu'
-#SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', '#jt&uwq_fe5)+n)qn%+y_w7^5&y(0iwj3yd-962ey8zn23&veu')
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG =False 
 
-ALLOWED_HOSTS = ['209.97.141.179', '127.0.0.1']
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -39,10 +36,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 ]
-
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -72,19 +67,6 @@ TEMPLATES = [
 WSGI_APPLICATION = 'OC_project8.wsgi.application'
 
 
-# Database
-# https://docs.djangoproject.com/en/2.0/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'purbeurre',
-        'USER': 'sham',
-        'PASSWORD': 'shamsham81',
-        'HOST': 'localhost',
-        'PORT': '5432',
-    }
-}
 
 
 # Password validation
@@ -104,6 +86,8 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+
+
 
 
 # Internationalization
@@ -129,10 +113,6 @@ STATIC_URL = '/static/'
 LOGIN_REDIRECT_URL = 'purbeurre:index'
 LOGOUT_REDIRECT_URL = 'purbeurre:index'
 
-# Heroku: Update database configuration from $DATABASE_URL.
-import dj_database_url
-db_from_env = dj_database_url.config(conn_max_age=500)
-DATABASES['default'].update(db_from_env)
 
 # The absolute path to the directory where collectstatic will collect static files for deployment.
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
