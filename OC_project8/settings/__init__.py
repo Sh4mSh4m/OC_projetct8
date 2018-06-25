@@ -14,7 +14,7 @@ import os
 import raven
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-DEBUG=False
+DEBUG=True
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
@@ -22,7 +22,7 @@ DEBUG=False
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = '#jt&uwq_fe5)+n)qn%+y_w7^5&y(0iwj3yd-962ey8zn23&veu'
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['shamnorobotto.live', '127.0.0.1', 'localhost']
 
 
 # Application definition
